@@ -6,6 +6,6 @@ export const carSchema = z.object({
   cost_in_credits: z.coerce.number().min(0, 'minimum de zéro').max(15, 'maximum de 15'),
 });
 
-export type Car = z.infer<typeof carSchema>;
+export type Car = z.infer<typeof carSchema> & { _id: string };
 
 //export { carSchema, type Car };

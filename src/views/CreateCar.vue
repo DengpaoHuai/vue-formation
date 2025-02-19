@@ -23,7 +23,7 @@ const onSubmit = () => {
     addcar(form)
       .then(() => {
         console.log('Car created');
-        router.push({ name: 'CarList' });
+        router.push({ name: 'cars-list' });
       })
       .catch((error) => {
         console.error(error);

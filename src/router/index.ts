@@ -23,6 +23,11 @@ const router = createRouter({
           name: 'cars-add',
           component: () => import('../views/CreateCar.vue'),
         },
+        {
+          path: 'list',
+          name: 'cars-list',
+          component: () => import('../views/ListCar.vue'),
+        },
       ],
     },
     {
