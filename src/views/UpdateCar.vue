@@ -10,10 +10,35 @@ const route = useRoute();
 
 const id = route.params.id as string;
 
-const carsData = useCarStore();
+const { updateCar, getCarById } = useCarStore();
+
+const form = reactive({
+  name: getCarById(id)?.name as string,
+  model: getCarById(id)?.model as string,
+  cost_in_credits: getCarById(id)?.cost_in_credits as number,
+});
+
+const onSubmit = () => {
+  const isValid = carSchema.safeParse(form);
+  if (!isValid) {
+    return;
+  }
+
+  updateCar(id, form);
+  router.back();
+};
 </script>
 
 <template>
   <h1>Create a new car</h1>
-  {{ id }}
+  <h1>Create a new car</h1>
+  <form @submit.prevent="onSubmit()">
+    <label for="name">Name</label>
+    <TextInput id="name" v-model="form.name" />
+    <label for="model">Model</label>
+    <TextInput id="model" v-model="form.model" />
+    <label for="cost_in_credits">Cost in credits</label>
+    <TextInput id="cost_in_credits" type="number" v-model="form.cost_in_credits" />
+    <button type="submit">Create</button>
+  </form>
 </template>

@@ -1,5 +1,7 @@
+import useCarStore from '@/stores/useCarStore';
 import HomeView from '@/views/HomeView.vue';
 import PlanetList from '@/views/PlanetList.vue';
+import type { RouteLocationNormalized, RouteLocationNormalizedLoaded } from 'vue-router';
 
 const routes = [
   {
@@ -29,6 +31,14 @@ const routes = [
         path: 'edit/:id',
         name: 'cars-edit',
         component: () => import('../views/UpdateCar.vue'),
+        beforeEnter: async (to: RouteLocationNormalized, from: RouteLocationNormalizedLoaded) => {
+          await useCarStore().getCars();
+          const currentCar = useCarStore().getCarById(to.params.id as string);
+          if (!currentCar) {
+            return false;
+          }
+          return true;
+        },
       },
     ],
   },
@@ -36,6 +46,11 @@ const routes = [
     path: '/about',
     name: 'about',
     component: () => import('../views/AboutView.vue'),
+  },
+  {
+    path: '/page',
+    name: 'page',
+    component: () => import('../views/Page1.vue'),
   },
 ];
 

@@ -14,3 +14,7 @@ export const getcars = async () => {
 export const deletecar = async (id: string) => {
   return httpClient.delete(`/cars/${id}`);
 };
+
+export const updatecar = async (id: string, car: Partial<Omit<Car, '_id'>>) => {
+  return httpClient.put(`/cars/${id}`, car);
+};
