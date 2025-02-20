@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import TextInput from '@/components/ui/inputs/TextInput.vue';
 import { carSchema } from '@/schemas/car.schema';
-import { addcar } from '@/services/car.service';
+import useCarStore from '@/stores/useCarStore';
 import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { z } from 'zod';
 
 const router = useRouter();
+const carsData = useCarStore();
 
 const errors = ref<string[]>([]);
 const form = reactive({
@@ -20,7 +20,8 @@ const onSubmit = () => {
   console.log(result.error?.errors);
   if (result.success) {
     console.log('Form is valid');
-    addcar(form)
+    carsData
+      .addCar(form)
       .then(() => {
         console.log('Car created');
         router.push({ name: 'cars-list' });

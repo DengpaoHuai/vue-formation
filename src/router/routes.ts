@@ -25,6 +25,11 @@ const routes = [
         name: 'cars-list',
         component: () => import('../views/ListCar.vue'),
       },
+      {
+        path: 'edit/:id',
+        name: 'cars-edit',
+        component: () => import('../views/UpdateCar.vue'),
+      },
     ],
   },
   {

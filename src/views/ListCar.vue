@@ -1,26 +1,16 @@
 <script setup lang="ts">
-import type { Car } from '@/schemas/car.schema';
-import { getcars } from '@/services/car.service';
-import { onMounted, ref } from 'vue';
+import useCarStore from '@/stores/useCarStore';
 
-const cars = ref<Car[]>([]);
-
-onMounted(() => {
-  getcars().then((data) => {
-    cars.value = data.data;
-  });
-});
-
-const deleteCar = (id: string) => {
-  console.log('Delete car with id:', id);
-};
+const carsData = useCarStore();
 </script>
 
 <template>
-  <div v-for="car in cars" :key="car._id">
+  <RouterLink :to="{ name: 'cars-add' }">Create a new car</RouterLink>
+  <div v-for="car in carsData.cars" :key="car._id">
     <h2>{{ car.name }}</h2>
     <p>Model: {{ car.model }}</p>
     <p>Cost in credits: {{ car.cost_in_credits }}</p>
-    <button @click="deleteCar(car._id)"></button>
+    <button @click="carsData.deleteCar(car._id)">delete</button>
+    <RouterLink :to="{ name: 'cars-edit', params: { id: car._id } }">Update</RouterLink>
   </div>
 </template>

@@ -45,6 +45,7 @@ const { data: dataVehicules, isLoading: isLoadingVehicules } = useFetch<ApiRespo
 </script>
 
 <template>
+  <RouterLink :to="{ name: 'cars-list' }">Car list</RouterLink>
   <h1>Star Wars Planets</h1>
   <div v-if="isLoading">Loading...</div>
   <div v-if="error">{{ error }}</div>
