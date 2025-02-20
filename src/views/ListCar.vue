@@ -10,6 +10,10 @@ onMounted(() => {
     cars.value = data.data;
   });
 });
+
+const deleteCar = (id: string) => {
+  console.log('Delete car with id:', id);
+};
 </script>
 
 <template>
@@ -17,5 +21,6 @@ onMounted(() => {
     <h2>{{ car.name }}</h2>
     <p>Model: {{ car.model }}</p>
     <p>Cost in credits: {{ car.cost_in_credits }}</p>
+    <button @click="deleteCar(car._id)"></button>
   </div>
 </template>

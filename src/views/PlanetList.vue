@@ -37,7 +37,7 @@ type ApiResponse<T> = {
 };
 
 //généric
-const { data, isLoading } = useFetch<ApiResponse<Planet>>('https://swapi.dev/api/planets');
+const { data, isLoading, error } = useFetch<ApiResponse<Planet>>('https://swapi.dev/api/planets');
 
 const { data: dataVehicules, isLoading: isLoadingVehicules } = useFetch<ApiResponse<Vehicules>>(
   'https://swapi.dev/api/vehicles',
@@ -47,6 +47,7 @@ const { data: dataVehicules, isLoading: isLoadingVehicules } = useFetch<ApiRespo
 <template>
   <h1>Star Wars Planets</h1>
   <div v-if="isLoading">Loading...</div>
+  <div v-if="error">{{ error }}</div>
   <div v-for="planet in data?.results" :key="planet.url">
     <h2>{{ planet.name }}</h2>
     <p>Population: {{ planet.population }}</p>
