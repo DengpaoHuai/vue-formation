@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import useCarStore from './stores/useCarStore';
+import { VueQueryDevtools } from '@tanstack/vue-query-devtools';
 </script>
 
 <template>
   <RouterView></RouterView>
+  <VueQueryDevtools />
 </template>
 
 <style scoped></style>

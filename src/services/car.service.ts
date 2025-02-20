@@ -7,12 +7,15 @@ export const createCarApi = async (car: Omit<Car, '_id'>) => {
 };
 
 export const getcars = async () => {
-  const res = httpClient.get('/cars');
-  return res;
+  const res = await httpClient.get('/cars');
+  return res.data;
 };
 
+const waitFor = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
 export const deletecar = async (id: string) => {
-  return httpClient.delete(`/cars/${id}`);
+  await waitFor(1000);
+  throw new Error('test');
 };
 
 export const updatecar = async (id: string, car: Partial<Omit<Car, '_id'>>) => {

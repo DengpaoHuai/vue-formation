@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import TextInput from '@/components/ui/inputs/TextInput.vue';
 import { carSchema } from '@/schemas/car.schema';
+import { createCarApi } from '@/services/car.service';
 import useCarStore from '@/stores/useCarStore';
 import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -20,8 +21,7 @@ const onSubmit = () => {
   console.log(result.error?.errors);
   if (result.success) {
     console.log('Form is valid');
-    carsData
-      .addCar(form)
+    createCarApi(form)
       .then(() => {
         console.log('Car created');
         router.push({ name: 'cars-list' });

@@ -52,6 +52,11 @@ const routes = [
     name: 'page',
     component: () => import('../views/Page1.vue'),
   },
+  {
+    path: '/planets',
+    name: 'planetspaginated',
+    component: () => import('../views/PlanetListPaginated.vue'),
+  },
 ];
 
 export default routes;
