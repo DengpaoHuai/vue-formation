@@ -24,22 +24,29 @@ type ApiResponse<T> = {
 
 const page = ref(1);
 
-const { data } = useQuery<ApiResponse<Planet>>({
+const { data, isLoading, error } = useQuery<ApiResponse<Planet>>({
   queryKey: ['planets', page],
   queryFn: () => getPlanets(page.value),
   retry: 5,
+  staleTime: 10000,
   refetchOnWindowFocus: true,
 });
 </script>
 
 <template>
+  <div v-if="isLoading">Loading...</div>
+  <div v-if="error">Error: {{ error.message }}</div>
   <button @click="page--" :disabled="!data?.previous">Previous</button>
   <button @click="page++" :disabled="!data?.next">Next</button>
   <RouterLink :to="{ name: 'cars-list' }">Car list</RouterLink>
   <h1>Star Wars Planets</h1>
   <CardComponentList :planets="data?.results!">
-    <template #title="{ message }"> {{ message }} - Planète </template>
+    <template #title="{ message, toto }"> {{ message }} - {{ toto }} </template>
+
+    <template #nomquetuveux>
+      <p>toto</p>
+    </template>
   </CardComponentList>
 </template>
 
-<style scoped></style>
+<style scoped lang="sass"></style>

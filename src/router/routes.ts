@@ -8,11 +8,18 @@ const routes = [
     path: '/home',
     name: 'home',
     component: HomeView,
+    meta: {
+      requiresAuth: true,
+      layout: 'PrivateLayout',
+    },
   },
   {
     path: '/planets-list',
     name: 'planets',
     component: PlanetList,
+    meta: {
+      layout: 'PublicLayout',
+    },
   },
   {
     path: '/cars',
@@ -58,5 +65,18 @@ const routes = [
     component: () => import('../views/PlanetListPaginated.vue'),
   },
 ];
+
+/*
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth) {
+    const isAuthenticated = useAuthStore().isAuthenticated;
+    if (!isAuthenticated) {
+      next('/login');
+    }
+  }
+  next();
+}
+);
+*/
 
 export default routes;

@@ -11,11 +11,12 @@ defineProps<{
     <div class="card-container">
       <div class="header">
         <h2>
-          <slot name="title" :message="planet.name"></slot>
+          <slot name="title" :message="planet.name" toto="value"></slot>
         </h2>
       </div>
       <div class="content">
         <p>Population: {{ planet.population }}</p>
+        <slot name="nomquetuveux"></slot>
       </div>
     </div>
   </div>
